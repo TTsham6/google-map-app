@@ -1,0 +1,21 @@
+env:
+  browser: true
+  node: true
+  vue/setup-compiler-macros: true
+extends:
+  - "eslint:recommended"
+  - "plugin:vue/vue3-recommended"
+  - "plugin:@typescript-eslint/recommended"
+parser: "vue-eslint-parser"
+parserOptions:
+  project: "./tsconfig.json"
+  parser: "@typescript-eslint/parser"
+  sourceType: "module"
+  extraFileExtensions: [".vue"]
+plugins:
+  - vue
+  - "@typescript-eslint"
+overrides:
+  - files: "*.vue"
+    rules:
+      no-undef: off
