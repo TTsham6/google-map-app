@@ -11,7 +11,7 @@ import HomeContainer from "./components/home/HomeContainer.vue";
     HomeContainer,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue { }
 </script>
 
 <style lang="scss">
