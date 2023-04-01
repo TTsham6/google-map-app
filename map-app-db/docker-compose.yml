@@ -10,3 +10,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      BIND-ADDRESS: 0.0.0.0
+      TZ: "Asia/Tokyo"
+    ports:
+      - 3306:3306
