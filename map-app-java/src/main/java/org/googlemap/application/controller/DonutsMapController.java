@@ -1,6 +1,7 @@
 package org.googlemap.application.controller;
 
 import org.googlemap.application.dto.CoordinateDto;
+import org.googlemap.application.dto.LatLngBoundsDto;
 import org.googlemap.domain.service.DonutsMapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +19,8 @@ public class DonutsMapController {
 
     @RequestMapping("eatin")
     @ResponseBody
-    public List<CoordinateDto> getEatInDonutsMap() {
-        return this.donutsMapService.getEatInDonutsMap();
+    public List<CoordinateDto> getEatInDonutsMap(LatLngBoundsDto latLngBounds) {
+        return this.donutsMapService.getEatInDonutsMap(latLngBounds);
     }
-
 
 }

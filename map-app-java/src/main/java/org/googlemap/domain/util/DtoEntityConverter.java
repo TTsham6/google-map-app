@@ -2,6 +2,8 @@ package org.googlemap.domain.util;
 
 import org.googlemap.application.dto.CoordinateDto;
 import org.googlemap.infra.model.Donut;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,8 +11,8 @@ import java.util.stream.Collectors;
 /**
  * DTOとEntity間の変換を担当する
  */
+@Component
 public class DtoEntityConverter {
-
     /**
      * Donuts Entityのリストを座標情報リストに変換する
      * @param donuts
