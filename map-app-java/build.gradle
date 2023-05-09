@@ -24,6 +24,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
 
     runtimeOnly 'mysql:mysql-connector-java:8.0.32'
+    runtimeOnly 'com.mysql:mysql-connector-j:'
 }
 
 test {
