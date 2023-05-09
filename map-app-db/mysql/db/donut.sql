@@ -13,8 +13,8 @@ DROP TABLE IF EXISTS `donut`;
 CREATE TABLE `donut` (
     `id` int NOT NULL AUTO_INCREMENT,
     `shop_name` char(35) NOT NULL,
-    `latitude` double(9,6) NOT NULl,
-    `longitude` double(9,6) NOT NULl,
+    `lat` double(9,6) NOT NULl,
+    `lng` double(9,6) NOT NULl,
     `eat_in_ok` boolean NOT NULL DEFAULT 1,
     `take_out_ok` boolean NOT NULL DEFAULT 0,
     PRIMARY KEY(`id`),
