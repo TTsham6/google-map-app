@@ -2,7 +2,6 @@ package org.googlemap.domain.util;
 
 import org.googlemap.application.dto.CoordinateDto;
 import org.googlemap.infra.model.Donut;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -37,8 +36,8 @@ public class DtoEntityConverter {
         CoordinateDto coordinate = new CoordinateDto();
 
         coordinate.setPlaceName(donut.getShopName());
-        coordinate.setLatitude(donut.getLatitude());
-        coordinate.setLongitude(coordinate.getLongitude());
+        coordinate.setLat(donut.getLat());
+        coordinate.setLng(donut.getLng());
         coordinate.setPlaceType("donuts");
 
         return coordinate;

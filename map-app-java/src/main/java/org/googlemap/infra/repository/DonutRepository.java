@@ -28,10 +28,10 @@ public interface DonutRepository extends JpaRepository<Donut, Integer> {
      */
     @Query("select d from Donut d " +
             "where d.eatInOk = True " +
-                "and d.latitude < :northLat " +
-                "and d.latitude > :southLat " +
-                "and d.longitude < :eastLng " +
-                "and d.longitude > :westLng")
+                "and d.lat < :northLat " +
+                "and d.lat > :southLat " +
+                "and d.lng < :eastLng " +
+                "and d.lng > :westLng")
     List<Donut> getEatInOkDonuts(@Param("northLat") double northLat,
                                                  @Param("southLat") double southLat,
                                                  @Param("eastLng") double eastLng,

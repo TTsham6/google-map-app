@@ -16,10 +16,10 @@ public class Donut {
     private String shopName;
 
     @Column(nullable = false)
-    private double latitude;
+    private double lat;
 
     @Column(nullable = false)
-    private double longitude;
+    private double lng;
 
     @Column(nullable = false)
     private boolean eatInOk = true;

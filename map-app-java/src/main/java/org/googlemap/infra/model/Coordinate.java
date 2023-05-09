@@ -16,8 +16,8 @@ public class Coordinate {
     private Long userId;
 
     @Column(nullable = false)
-    private Double latitude;
+    private Double lat;
 
     @Column(nullable = false)
-    private Double longitude;
+    private Double lng;
 }

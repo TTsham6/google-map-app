@@ -9,7 +9,7 @@ public class CoordinateDto {
 
     private String placeType;
 
-    private double latitude;
+    private double lat;
 
-    private double longitude;
+    private double lng;
 }
