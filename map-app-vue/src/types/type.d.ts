@@ -11,9 +11,3 @@ export interface BoundsCoordinate {
     eastLng: number,
     westLng: number
 }
-
-export interface DonutsCoordinate {
-    placeName: string,
-    lat: number,
-    lng: number
-}

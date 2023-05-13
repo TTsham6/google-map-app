@@ -56,22 +56,7 @@ const drawEatInMarkers = async () => {
   const boundsCoordinat = getMapBoundsCoord();
 
   // バックエンドから表示範囲内のドーナツ店のリストを取得
-  // const eatInDonuts = await getEatInDonuts(boundsCoordinat) as DonutsCoordinate[];
-
-  const eatInDonuts: Coordinate[] = [
-    {
-      "placeName": "クリスピー・クリーム・ドーナツ渋谷シネタワー店",
-      "placeType": "donuts",
-      "lat": 35.659308,
-      "lng": 139.698914
-    },
-    {
-      "placeName": "WHITEGLASSCOFFEE",
-      "placeType": "donuts",
-      "lat": 35.656632,
-      "lng": 139.699808
-    }
-  ];
+  const eatInDonuts = await getEatInDonuts(boundsCoordinat) as Coordinate[];
 
   // ドーナツ店の座標をGoogleMapに描画
   eatInDonuts.forEach(donutCoord => {
