@@ -2,7 +2,7 @@
 import { Loader } from "@googlemaps/js-api-loader";
 import { Ref, onMounted, ref } from "vue";
 import { BoundsCoordinate, Coordinate } from "@/types/type";
-import { getEatInDonuts } from "@/api/donut-map-api";
+import { getDonuts } from "@/api/donut-map-api";
 import { makeInfoWindowContent } from "@/util/dom-util"
 
 // 定数
@@ -11,6 +11,7 @@ const googleMap = ref<HTMLElement>();
 const zoom = 15;
 const latitude: Ref<number> = ref(35.6809591);
 const longitude: Ref<number> = ref(139.7673068);
+const shopType: Ref<string> = ref("all");
 
 const loader = new Loader({
   apiKey: process.env.VUE_APP_GOOGLE_API_KEY,
@@ -18,49 +19,39 @@ const loader = new Loader({
   libraries: ["places"],
 });
 
-onMounted(() => {
-  drawGoogleMap();
+onMounted(async () => {
+  map = await initializeMap() as google.maps.Map;
 });
 
 /**
  * Google Mapを描画する
+ * @returns Google Mapオブジェクト
  */
-const drawGoogleMap = async () => {
+const initializeMap = async () => {
   // オプション作成
   const mapOptions = {
     center: {
       lat: latitude.value,
       lng: longitude.value,
     },
-    zoom,
+    zoom
   };
 
-  try {
-    // GoogleMap APIを呼び出して、マップを描画する
-    const google = await loader.load();
-    map = new google.maps.Map(googleMap.value as HTMLElement, mapOptions);
-
-    // イートイン可能なドーナツのマーカーを描画する
-    drawEatInMarkers();
-
-  } catch (error) {
-    console.log(error);
-  }
+  const google = await loader.load();
+  const map = new google.maps.Map(googleMap.value as HTMLElement, mapOptions);
+  return map;
 };
 
 /**
- * イートイン可能なドーナツマップを描画する
+ * google map上にマーカーを作成する
  */
-const drawEatInMarkers = async () => {
-  // 現在のGoogle Mapの範囲を取得
+const drawMarkers = async () => {
+
   const boundsCoordinat = getMapBoundsCoord();
 
-  // バックエンドから表示範囲内のドーナツ店のリストを取得
-  const eatInDonuts = await getEatInDonuts(boundsCoordinat) as Coordinate[];
+  const donuts = await getDonuts(boundsCoordinat, shopType.value) as Coordinate[];
 
-  // ドーナツ店の座標をGoogleMapに描画
-  eatInDonuts.forEach(donutCoord => {
-
+  donuts.forEach(donutCoord => {
     const marker = new google.maps.Marker({
       position: new google.maps.LatLng(donutCoord.lat, donutCoord.lng),
       map
@@ -117,7 +108,7 @@ const getMapBoundsCoord = (): BoundsCoordinate => {
     <div class="title">
       <p>地図アプリ（仮）</p>
     </div>
-    <form novalidate @submit.prevent="drawGoogleMap">
+    <form novalidate @submit.prevent="initializeMap">
       <input v-model="latitude" type="number">
       <input v-model="longitude" type="number">
       <button type="submit">
@@ -125,7 +116,17 @@ const getMapBoundsCoord = (): BoundsCoordinate => {
       </button>
     </form>
     <div>
-      <button @click="getMapBoundsCoord">このエリアで再検索</button>
+      <input type="radio" v-model="shopType" value="all" v-on:change="drawMarkers">
+      <label for="all">すべてのドーナツ店を表示</label>
+
+      <input type="radio" v-model="shopType" value="eatin" v-on:change="drawMarkers">
+      <label for="eatin">イートイン可能な店だけ表示</label>
+
+      <input type="radio" v-model="shopType" value="takeout" v-on:change="drawMarkers">
+      <label for="takeout3">テイクアウト可能な店だけ表示</label>
+    </div>
+    <div>
+      <button @click="drawMarkers">ドーナツショップを検索</button>
     </div>
     <div ref="googleMap" class="google-map" />
   </div>

@@ -17,10 +17,22 @@ public class DonutsMapController {
     @Autowired
     DonutsMapService donutsMapService;
 
+    @RequestMapping("all")
+    @ResponseBody
+    public List<CoordinateDto> getAllDonutsMap(LatLngBoundsDto latLngBounds) {
+        return this.donutsMapService.getAllDonutsMap(latLngBounds);
+    }
+
     @RequestMapping("eatin")
     @ResponseBody
     public List<CoordinateDto> getEatInDonutsMap(LatLngBoundsDto latLngBounds) {
         return this.donutsMapService.getEatInDonutsMap(latLngBounds);
+    }
+
+    @RequestMapping("takeout")
+    @ResponseBody
+    public List<CoordinateDto> getTakeOutDonutsMap(LatLngBoundsDto latLngBounds){
+        return this.donutsMapService.getTakeOutDonutsMap(latLngBounds);
     }
 
 }

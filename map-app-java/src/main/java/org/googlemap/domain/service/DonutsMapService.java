@@ -9,7 +9,6 @@ import org.googlemap.infra.repository.DonutRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,20 +23,22 @@ public class DonutsMapService {
     @Autowired
     DtoEntityConverter converter;
 
-    /**
-     * イートインが可能なドーナツ店を取得する
+    /***
+     * 全てのドーナツ店を取得する
      *
-     * @return イートインが可能なドーナツ店の座標リスト
+     * @param latLngBounds Google Mapの南北の緯度の範囲と東西の経度の範囲
+     * @return 全てのドーナツ店の座標リスト
      */
-    public List<CoordinateDto> getEatInDonutsMap(){
-        // イートインが可能なドーナツ店を取得する
-        List<Donut> eatInDonutsList = this.donutRepository.getEatInOkDonuts();
+    public List<CoordinateDto> getAllDonutsMap(LatLngBoundsDto latLngBounds) {
+        List<Donut> allDonuts = this.donutRepository.getAllDonuts(latLngBounds.getNorthLat(),
+                latLngBounds.getSouthLat(),
+                latLngBounds.getEastLng(),
+                latLngBounds.getWestLng());
 
-        // EntityをDTOに変換
-        List<CoordinateDto> coordinateList = this.converter
-                .convertDonutListToCoordinateList(eatInDonutsList);
+        List<CoordinateDto> coordinateLis = this.converter
+                .convertDonutListToCoordinateList(allDonuts);
 
-        return coordinateList;
+        return coordinateLis;
     }
 
     /***
@@ -57,6 +58,26 @@ public class DonutsMapService {
                 .convertDonutListToCoordinateList(eatInDonutsList);
 
         return coordinateList;
+    }
+
+    /***
+     * テイクアウトが可能なドーナツ店を取得する
+     *
+     * @param latLngBounds Google Mapの南北の緯度の範囲と東西の経度の範囲
+     * @return テイクアウトが可能なドーナツ店の座標リスト
+     */
+    public List<CoordinateDto> getTakeOutDonutsMap(LatLngBoundsDto latLngBounds){
+
+        List<Donut> takeOutDonutsList = this.donutRepository.getTakeOutOkDonuts(latLngBounds.getNorthLat(),
+                latLngBounds.getSouthLat(),
+                latLngBounds.getEastLng(),
+                latLngBounds.getWestLng());
+
+        List<CoordinateDto> coordinateList = this.converter
+                .convertDonutListToCoordinateList(takeOutDonutsList);
+
+        return  coordinateList;
+
     }
 
 

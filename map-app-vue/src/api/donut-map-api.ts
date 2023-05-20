@@ -1,24 +1,26 @@
-import { BoundsCoordinate, DonutsCoordinate } from "@/types/type";
+import { BoundsCoordinate, Coordinate } from "@/types/type";
 import axios, { AxiosRequestConfig, isAxiosError } from "axios"
 
 const TIME_OUT = 15000;
-const BASE_URL = process.env.VUE_BASE_URL;
+const BASE_URL = process.env.VUE_APP_BASE_URL;
 
 /**
- * バックエンドからドーナツ店の座標リストを取得する
- * @param boundCoordinate  
- * @returns
+ * バックエンドから
+ * @param boundCoordinate 
+ * @param shopType 
+ * @returns 
  */
-export const getEatInDonuts = async (boundCoordinate: BoundsCoordinate) => {
+export const getDonuts = async (boundCoordinate: BoundsCoordinate, shopType: string) => {
     const config: AxiosRequestConfig = {
-        url: `${BASE_URL}:8080/donuts/eatin`,
+        url: `http://${BASE_URL}:8080/donuts/${shopType}`,
         method: "GET",
         timeout: TIME_OUT,
         params: boundCoordinate
     }
 
     try {
-        const response = await axios<DonutsCoordinate[]>(config);
+        const response = await axios<Coordinate[]>(config);
+        console.log(response);
         return response.data
     } catch (error) {
         if (isAxiosError(error) && error.response && error.response.status) {
