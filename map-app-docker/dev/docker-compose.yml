@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+  map-mysql:
+    build:
+      context: ../../
+      dockerfile: map-app-db/mysql/Dockerfile
+    image: "map_app_db"
+    volumes:
+      - ../../map-app-db/mysql/db:/docker-entrypoint-initdb.d
+      - ../../map-app-db/mysql/data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      BIND-ADDRESS: 0.0.0.0
+      TZ: "Asia/Tokyo"
+    ports:
+      - 3306:3306
+
+  map-spring:
+    container_name: map-app-spring
+    restart: always
+    build:
+      context: ../../
+      dockerfile: map-app-java/Dockerfile
+    image: "map_app_spring"
+    ports:
+      - 8080:8080
+    tty: true
+    depends_on:
+      - map-mysql

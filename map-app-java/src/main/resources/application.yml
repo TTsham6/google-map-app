@@ -1,10 +1,6 @@
-#spring:
-#  properties:
-#      active: dev
-# DB接続情報
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/donuts_map_db
+    url: jdbc:mysql://map-mysql:3306/donuts_map_db
     username: root
     password: hoge321
