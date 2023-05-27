@@ -1,6 +1,11 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'idea'
+    id 'eclipse'
     id 'org.springframework.boot' version '3.0.3'
+    id 'com.palantir.docker' version '0.35.0'
+    id 'com.palantir.docker-run' version '0.35.0'
 }
 
 apply plugin: 'java'
@@ -30,3 +35,18 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+ docker {
+     name "map-app-java:latest"
+     dockerfile file('Dockerfile')
+     copySpec.from('build/libs').into('build/libs')
+     noCache true
+     dependsOn tasks.build
+ }
+
+ dockerRun {
+     name "map-app-java"
+     image "map-app-java:latest"
+     daemonize false
+     clean true
+ }
