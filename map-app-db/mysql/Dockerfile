@@ -9,6 +9,7 @@ ENV LANG ja_JP.UTF-8
 ENV LANGUAGE ja_JP:ja
 ENV LC_ALL ja_JP.UTF-8
 
-ADD map-app-db/mysql/my.cnf /etc/mysql/conf.d/my.cnf
+COPY ./my.cnf /etc/mysql/conf.d/my.cnf
+COPY ./db/donut.sql /docker-entrypoint-initdb.d/init.sql
 
 CMD ["mysqld"]

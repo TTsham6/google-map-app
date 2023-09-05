@@ -1,8 +1,8 @@
 SET @old_autocommit=@@autocommit;
 
-CREATE DATABASE `donuts_map_db` DEFAULT CHARACTER SET utf8;
+CREATE DATABASE IF NOT EXISTS `donuts_map_db` DEFAULT CHARACTER SET utf8;
 
-use `donuts_map_db`;
+USE `donuts_map_db`;
 
 -- 
 -- Table structure for table `donut`
