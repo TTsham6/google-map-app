@@ -1,8 +1,8 @@
 FROM gradle:8-jdk17-alpine as builder
 WORKDIR /home/gradle
-COPY --chown=gradle:gradle map-app-java/build.gradle build.gradle
-COPY --chown=gradle:gradle map-app-java/settings.gradle settings.gradle
-COPY --chown=gradle:gradle map-app-java/src src
+COPY --chown=gradle:gradle build.gradle build.gradle
+COPY --chown=gradle:gradle settings.gradle settings.gradle
+COPY --chown=gradle:gradle src src
 RUN gradle build
 
 
@@ -14,5 +14,5 @@ USER app
 WORKDIR /home/app
 COPY --from=builder --chown=app:app /home/gradle/build/libs/*.jar app.jar
 # RUN map-app-java/bin/map-app-java
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
 
