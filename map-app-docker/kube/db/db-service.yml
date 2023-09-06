@@ -5,7 +5,7 @@ metadata:
   namespace: map-app
 spec:
   selector:
-    app: sample-db
+    app: map-db
   type: ClusterIP
   ports:
     - protocol: TCP
