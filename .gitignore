@@ -1,2 +1,6 @@
 .idea
 .git
+
+*vue-secret.yml
+*spring-secret.yml
+*db-secret.yml
