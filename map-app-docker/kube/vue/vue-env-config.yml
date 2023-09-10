@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vue-env
+  namespace: map-app
+data:
+  ap-hostname: "spring-service"
