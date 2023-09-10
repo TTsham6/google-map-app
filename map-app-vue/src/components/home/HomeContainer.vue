@@ -51,6 +51,10 @@ const drawMarkers = async () => {
 
   const donuts = await getDonuts(boundsCoordinat, shopType.value) as Coordinate[];
 
+  if (donuts.length == 0) {
+    alert("地図の表示範囲内に店舗が見つかりませんでした。");
+  }
+
   donuts.forEach(donutCoord => {
     const marker = new google.maps.Marker({
       position: new google.maps.LatLng(donutCoord.lat, donutCoord.lng),
@@ -106,16 +110,16 @@ const getMapBoundsCoord = (): BoundsCoordinate => {
 <template>
   <div>
     <div class="title">
-      <p>地図アプリ（仮）</p>
+      <p>ドーナッツMAP</p>
     </div>
-    <form novalidate @submit.prevent="initializeMap">
+    <!-- <form novalidate @submit.prevent="initializeMap">
       <input v-model="latitude" type="number">
       <input v-model="longitude" type="number">
       <button type="submit">
         検索
       </button>
-    </form>
-    <div>
+    </form> -->
+    <!-- <div>
       <input type="radio" v-model="shopType" value="all" v-on:change="drawMarkers">
       <label for="all">すべてのドーナツ店を表示</label>
 
@@ -124,7 +128,7 @@ const getMapBoundsCoord = (): BoundsCoordinate => {
 
       <input type="radio" v-model="shopType" value="takeout" v-on:change="drawMarkers">
       <label for="takeout3">テイクアウト可能な店だけ表示</label>
-    </div>
+    </div> -->
     <div>
       <button @click="drawMarkers">ドーナツショップを検索</button>
     </div>

@@ -20,7 +20,6 @@ export const getDonuts = async (boundCoordinate: BoundsCoordinate, shopType: str
 
     try {
         const response = await axios<Coordinate[]>(config);
-        console.log(response);
         return response.data
     } catch (error) {
         if (isAxiosError(error) && error.response && error.response.status) {
