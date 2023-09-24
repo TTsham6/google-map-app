@@ -130,7 +130,7 @@ const getMapBoundsCoord = (): BoundsCoordinate => {
       <label for="takeout3">テイクアウト可能な店だけ表示</label>
     </div> -->
     <div>
-      <button @click="drawMarkers">ドーナツショップを検索</button>
+      <button @click="drawMarkers">ドーナッツショップを探す</button>
     </div>
     <div ref="googleMap" class="google-map" />
   </div>
