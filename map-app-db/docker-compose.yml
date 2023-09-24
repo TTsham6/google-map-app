@@ -2,8 +2,10 @@ version: '3.1'
 
 services:
   mysql:
-    build: "./mysql/"
-    image: "mysql_map_db"
+    container_name: db-container
+    build:
+      dockerfile: ./mysql/Dockerfile
+    image: "map-app-db"
     volumes:
       - ./mysql/db:/docker-entrypoint-initdb.d
       - ./mysql/data:/var/lib/mysql
