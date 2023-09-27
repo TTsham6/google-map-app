@@ -3,7 +3,7 @@
 地図でドーナッツのMAPのお店を探すWEBサービスです
 
 ## 動作イメージ
-![sample](https://github.com/TTsham6/google-map-app/assets/37510144/7d84f440-8aa9-4cbd-8048-abc3da9b4913)
+![sample](https://github.com/TTsham6/google-map-app/assets/37510144/3b2874ed-0060-479a-b10e-19988558f4c4)
 
 ## 使用している技術
  
